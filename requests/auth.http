@@ -1,0 +1,51 @@
+###
+## REGISTER USER
+POST http://127.0.0.1:5000/register
+Content-Type: application/json
+
+{
+    "username": "Jenna",
+    "password": "3W!W.:srzc4r^!P",
+    "role":"user"
+}
+
+###
+POST http://127.0.0.1:5000/login
+Content-Type: application/json
+
+{
+    "username": "Jenna",
+    "password": "3W!W.:srzc4r^!P",
+    "role":"user"
+}
+
+###
+GET http://127.0.0.1:5000/dashboard
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
+###
+POST http://127.0.0.1:5000/add_incident
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
+{
+    "name": "INCIDENT 1",
+    "accused": "Example Accused",
+    "victim": "Example Victim",
+    "reported_by": "Example Reporter",
+    "location": "Example Location",
+    "date": "2024-01-24 15:30:00",
+    "message": "Example Message",
+    "status": "Example Status"
+}
+
+
+###
+GET http://127.0.0.1:5000/incident/1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
+###
+DELETE http://127.0.0.1:5000/delete_incident/1
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
