@@ -49,3 +49,18 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0
 DELETE http://127.0.0.1:5000/delete_incident/1
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
 
+###
+PUT http://127.0.0.1:5000/update_incident/3
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
+{
+    "name": "INCIDENT 1",
+    "accused": "Example Accused",
+    "victim": "Example Victim",
+    "reported_by": "Example Reporter",
+    "location": "Example Location",
+    "date": "2024-01-24 15:30:00",
+    "message": "Example Message",
+    "status": "Example Status"
+}
