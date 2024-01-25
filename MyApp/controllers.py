@@ -110,24 +110,14 @@ class Login(Resource):
 
         return {'message': 'Invalid credentials'}, 401
 
-
-class Protected(Resource):
+class AllUsers(Resource):
     @marshal_with(userFields)
     @token_required
     def get(self, current_user):
-        return current_user
+        print("current user is ",current_user)
 
-
-
-class UpdateUser(Resource):
-    @marshal_with(userFields)
-    @token_required
-    def put(self, current_user):
-        data = request.json
-        current_user.username = data.get('username', current_user.username)
-        current_user.role = data.get('role', current_user.role)
-        db.session.commit()
-        return current_user
+        users = User.query.all()
+        return users
 
 
 
@@ -149,6 +139,24 @@ class IndividualUser(Resource):
             return {'message': 'User deleted successfully'}
         return {'message': 'User not found'}, 404
 
+    @marshal_with(userFields)
+    @token_required
+    def put(self, current_user,user_id):
+        data = request.json
+        username = data.get('username')
+        password = data.get('password')  
+        role = data.get('role', 'user')
+
+        user = User.query.get(user_id)
+        if user:
+            user.username = username
+            user.password = password
+            user.role = role
+            db.session.commit()
+            return user
+        return {'message': 'User not found'}, 404
+
+
 
 class Incidents(Resource):
     @marshal_with(incidentFields)
@@ -161,6 +169,11 @@ class Incidents(Resource):
     @token_required
     def post(self,current_user):
         data = request.json
+        name = data.get('name')
+        existing_incident = Incident.query.filter_by(name=name).first()
+        if existing_incident:
+            return {"message": "Incident already exists"}, 400
+
         incident = Incident(
             name=data['name'], accused=data['accused'], victim=data['victim'],
             reported_by=data['reported_by'], location=data['location'],
@@ -168,5 +181,49 @@ class Incidents(Resource):
         )
         db.session.add(incident)
         db.session.commit()
-        incidents = Incident.query.all()
-        return incidents
+        return {"message": "Incident registered successfully"}, 201
+
+class IndividualIncident(Resource):
+    @marshal_with(incidentFields)
+    @token_required
+    def get(self, current_user, incident_id):
+        incident = Incident.query.get(incident_id)
+        if incident:
+            return incident
+        return {'message': 'Incident not found'}, 404
+
+    @token_required
+    def delete(self, current_user, incident_id):
+        incident = Incident.query.get(incident_id)
+        if incident:
+            db.session.delete(incident)
+            db.session.commit()
+            return {'message': 'Incident deleted successfully'}
+        return {'message': 'Incident not found'}, 404
+
+    @marshal_with(incidentFields)
+    @token_required
+    def put(self, current_user, incident_id):
+        data = request.json
+        name = data.get('name')
+        accused = data.get('accused')
+        victim = data.get('victim')
+        reported_by = data.get('reported_by')
+        location = data.get('location')
+        date = data.get('date')
+        message = data.get('message')
+        status = data.get('status')
+
+        incident = Incident.query.get(incident_id)
+        if incident:
+            incident.name = name
+            incident.accused = accused
+            incident.victim = victim
+            incident.reported_by = reported_by
+            incident.location = location
+            incident.date = date
+            incident.message = message
+            incident.status = status
+            db.session.commit()
+            return incident
+        return {'message': 'Incident not found'}, 404

@@ -1,18 +1,4 @@
 ###
-GET http://127.0.0.1:5000/protected
-Content-Type: application/json
-
-
-###
-POST http://127.0.0.1:5000/
-Content-Type: application/json
-
-{
-    "name": "Hello"
-}
-
-
-###
 ## REGISTER USER
 POST http://127.0.0.1:5000/register
 Content-Type: application/json
@@ -24,52 +10,58 @@ Content-Type: application/json
 }
 
 ###
-POST http://127.0.0.1:5000/users
-Content-Type: application/json
-
-{
-    "username": "Jenna",
-    "password": "3W!W.:srzc4r^!P",
-    "role":"user"
-}
-
-###
+## LOGIN USER
 POST http://127.0.0.1:5000/login
 Content-Type: application/json
 
 {
     "username": "Robinson",
+    "password": "3W!W.:srzc4r^!P"
+}
+
+
+###
+# GET USERS 
+GET http://127.0.0.1:5000/users
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDYxNzkwMDN9.A-mmbzY8grSFHS5oRFnkIrELDXSBKA_D3OZqc7vtzlM
+
+###
+# GET INDIVIDUAL USER
+GET http://127.0.0.1:5000/users/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MDYxNzkyODd9.p6TpuavLDCQN9UEsWyBOU1S3X3I1ux8CXo_gMJdkha8
+
+###
+# DELETE INDIVIDUAL USER
+DELETE http://127.0.0.1:5000/users/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MDYxNzkyODd9.p6TpuavLDCQN9UEsWyBOU1S3X3I1ux8CXo_gMJdkha8
+###
+# UPDATE INDIVIDUAL USER
+PUT http://127.0.0.1:5000/users/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MDYxNzkyODd9.p6TpuavLDCQN9UEsWyBOU1S3X3I1ux8CXo_gMJdkha8
+
+
+{
+    "username": "Ngecu1",
     "password": "3W!W.:srzc4r^!P",
     "role":"user"
 }
 
 
-###
-GET http://127.0.0.1:5000/users
-Content-Type: application/json
-
 
 ###
-GET http://127.0.0.1:5000/dashboard
-Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
-
-###
+# GET ALL INCIDENTS 
 GET http://127.0.0.1:5000/incidents
 Content-Type: application/json
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDYxNzQ5OTJ9.-6PdpbomgnHR4W7Gb4Vf9hBIsU6esFpLjAyX_gWw1Qo
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE3MDYxNzkyODd9.p6TpuavLDCQN9UEsWyBOU1S3X3I1ux8CXo_gMJdkha8
 
 
 ###
-GET http://127.0.0.1:5000/incidents
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
-
-###
-DELETE http://127.0.0.1:5000/delete_incident/1
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
-
-###
-PUT http://127.0.0.1:5000/update_incident/3
+# ADD AN INCIDENT 
+POST http://127.0.0.1:5000/incidents
 Content-Type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
 
@@ -83,3 +75,15 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0
     "message": "Example Message",
     "status": "Example Status"
 }
+
+###
+# GET INDIVIDUAL INCIDENT 
+GET http://127.0.0.1:5000/incidents/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
+
+###
+# DELETE INDIVIDUAL INCIDENT 
+DELETE http://127.0.0.1:5000/incidents/1
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxfQ.yQ0a3wDcLLSlckbZowXTgM3gjsSs8uHhhuFKJ02RXvg
