@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://127.0.0.1:5000/login
+POST http://127.0.0.1:5000/users
 Content-Type: application/json
 
 {
@@ -18,6 +18,11 @@ Content-Type: application/json
     "password": "3W!W.:srzc4r^!P",
     "role":"user"
 }
+
+###
+GET http://127.0.0.1:5000/users
+Content-Type: application/json
+
 
 ###
 GET http://127.0.0.1:5000/dashboard
